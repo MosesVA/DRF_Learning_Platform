@@ -1,8 +1,8 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework.fields import SerializerMethodField
 
-from sections.models import Section, SectionContent
-from sections.serializers.section_content_serializers import SectionContentSectionSerializer
+from sections.models import Section, ContentSection
+from sections.serializers.content_section_serializers import ContentSectionSectionSerializer
 
 
 class SectionSerializer(ModelSerializer):
@@ -12,11 +12,11 @@ class SectionSerializer(ModelSerializer):
 
 
 class SectionListSerializer(ModelSerializer):
-    section_content_title = SerializerMethodField()
+    content_section_title = SerializerMethodField()
 
-    def get_section_content_data(self, section):
-        return SectionContentSectionSerializer(SectionContent.objects.filter(section=section), many=True).data
+    def get_content_section_data(self, section):
+        return ContentSectionSectionSerializer(ContentSection.objects.filter(section=section), many=True).data
 
     class Meta:
         model = Section
-        fields = ('id', 'title', 'section_content_title')
+        fields = ('id', 'title', 'content_section_title')
