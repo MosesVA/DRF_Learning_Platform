@@ -5,8 +5,8 @@ from rest_framework.routers import DefaultRouter
 from sections.apps import SectionsConfig
 
 from sections.views import SectionListAPIView, SectionCreateAPIView, SectionRetrieveAPIView, SectionUpdateAPIView, \
-    SectionDestroyAPIView, ContentListSectionAPIView, ContentSectionCreateAPIView, ContentSectionRetrieveAPIView, \
-    ContentSectionUpdateAPIView, ContentSectionDestroyAPIView
+    SectionDestroyAPIView, ContentListAPIView, ContentCreateAPIView, ContentRetrieveAPIView, \
+    ContentUpdateAPIView, ContentDestroyAPIView
 
 app_name = SectionsConfig.name
 
@@ -23,9 +23,9 @@ urlpatterns = [
 
     # Section urlpatterns
 
-    path('content/list/', ContentListSectionAPIView.as_view(), name='content_list'),
-    path('content/create/', ContentSectionCreateAPIView.as_view(), name='content_create'),
-    path('content/<int:pk>/', ContentSectionRetrieveAPIView.as_view(), name='content_detail'),
-    path('content/<int:pk>/update/', ContentSectionUpdateAPIView.as_view(), name='content_update'),
-    path('content/<int:pk>/delete/', ContentSectionDestroyAPIView.as_view(), name='content_delete'),
+    path('content/list/', ContentListAPIView.as_view(), name='content_list'),
+    path('content/create/', ContentCreateAPIView.as_view(), name='content_create'),
+    path('content/<int:pk>/', ContentRetrieveAPIView.as_view(), name='content_detail'),
+    path('content/<int:pk>/update/', ContentUpdateAPIView.as_view(), name='content_update'),
+    path('content/<int:pk>/delete/', ContentDestroyAPIView.as_view(), name='content_delete'),
 ] + router.urls
