@@ -29,3 +29,18 @@ class Content(models.Model):
         verbose_name = 'Content'
         verbose_name_plural = 'Contents'
         ordering = ['id']
+
+
+class Tests(models.Model):
+    test_section = models.ForeignKey(Section, on_delete=models.CASCADE, verbose_name='Test section')
+    description = models.TextField(verbose_name='Test description', **NULLABLE)
+    question = models.TextField(verbose_name='Question', **NULLABLE)
+    answer = models.TextField(max_length=40, verbose_name='Answer', **NULLABLE)
+
+    def __str__(self):
+        return f'Тест по курсу {self.test_section.title}'
+
+    class Meta:
+        verbose_name = 'Test'
+        verbose_name_plural = 'Tests'
+        ordering = ['test_section']
