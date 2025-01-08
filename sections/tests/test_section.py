@@ -11,7 +11,7 @@ class SectionTestCase(APITestCase):
         """Базовые настройки"""
         self.user = get_admin_user()
         response = self.client.post('/users/token/', {"email": "tester@test1.com", "password": "qwerty"})
-        self.access_token = response.json.get('access')
+        self.access_token = response.json().get('')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer  {self.access_token}')
         self.test_section = Section.objects.create(
             title="test_section",
@@ -31,7 +31,7 @@ class SectionTestCase(APITestCase):
 
     def test_section_delete(self):
         response = self.client.delete('/section/3/delete/')
-        print(response.json())
+        print(response)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_section_detail(self):
@@ -42,7 +42,7 @@ class SectionTestCase(APITestCase):
         self.assertEqual(response.json()['description'], "test_description")
 
     def test_section_list(self):
-        response = self.client.get('section/list/')
+        response = self.client.get('/section/list/')
         print(response.json())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['results'][0]['title'], 'test_section')
